@@ -1,4 +1,4 @@
-public class Tarzan extends Human {
+public class Tarzan extends Agent {
 
     Tarzan(int x, int y){
         super(x, y);

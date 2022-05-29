@@ -70,5 +70,8 @@ public class Map {
         }
     }
 
+    public int getSize(){
+        return this.size;
+    }
 
 }
