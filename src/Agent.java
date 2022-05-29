@@ -9,6 +9,7 @@ abstract class Agent {
         this.pos[0]=this.pos[1]=0;
         this.hidden=false;
     }
+<<<<<<< HEAD
 
     Agent(int x, int y){
         this.pos[0] = x;
@@ -19,6 +20,11 @@ abstract class Agent {
     public void go(Map map) {
         Random rand = new Random();
         int choice = rand.nextInt(4);
+=======
+    void go(String[][] board1, int boardSize) {
+        Random r = new Random();
+        int choice = r.nextInt(13) + 1;
+>>>>>>> 77b97321e2f882ea518484bba550922288f5e457
 
         switch (choice) {
             case 1:
@@ -41,25 +47,66 @@ abstract class Agent {
                     go(board1, boardSize);
                 }
             case 4:
-                if () {
+                if (x<boardSize-1 && x>0) {
                     x--;
+                } else {
+                    go(board1, boardSize);
                 }
             case 5:
-                if () {
+                if (y<boardSize-1 && y>0) {
                     y--;
+                } else {
+                    go(board1, boardSize);
                 }
             case 6:
-                if () {
+                if (x<boardSize-1 && x>0 && y<boardSize-1 && y>0) {
                     x--;
                     y--;
+                } else {
+                    go(board1, boardSize);
                 }
             case 7:
-                if () {
+                if (x==boardSize-1 && y<boardSize) {
                     y++;
+                } else {
+                    go(board1, boardSize);
                 }
             case 8:
-                if () {
-                    y++;
+                if (x==boardSize-1 && y<boardSize && y>0) {
+                    y--;
+                } else {
+                    go(board1, boardSize);
+                }
+            case 9:
+                if (x<boardSize-1 && y==boardSize) {
+                    x++;
+                } else {
+                    go(board1, boardSize);
+                }
+            case 10:
+                if (x<boardSize-1 && x>0 && y==boardSize) {
+                    x--;
+                } else {
+                    go(board1, boardSize);
+                }
+            case 11:
+                if (x==boardSize-1 && y==boardSize) {
+                    x--;
+                    y--;
+                } else {
+                    go(board1, boardSize);
+                }
+            case 12:
+                if (x==boardSize-1 && y==boardSize) {
+                    x--;
+                } else {
+                    go(board1, boardSize);
+                }
+            case 13:
+                if (x==boardSize-1 && y==boardSize) {
+                    y--;
+                } else {
+                    go(board1, boardSize);
                 }
         }
     }
