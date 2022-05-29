@@ -16,7 +16,7 @@ abstract class Agent {
         this.hidden=false;
     }
 
-    //0-left, 1-up, 2-right, 3-down
+    //0-left, 1-up, 2-right, 3-down, (do poprawienia: 4-up left, 5-down right, 6-up right, 7-down left)
     public void go(Map map) {
         Random rand = new Random();
         int dir = rand.nextInt(4);
@@ -33,7 +33,7 @@ abstract class Agent {
             }
             case 1: {
                 if(pos[1]==0){
-                    System.out.println("nie mozna isc do gory");
+                    System.out.println("nie mozna isc w gore");
                 }
                 else{
                     pos[1]--;
@@ -58,91 +58,47 @@ abstract class Agent {
                 }
                 break;
             }
+            /*case 4: {
+                if(pos[0]==0 && pos[1]==0){
+                    go(map);
+                }
+                else{
+                    pos[0]--;
+                    pos[1]--;
+                }
+                break;
+            }
+            case 5: {
+                if(pos[0]== map.getSize()-1 && pos[1]== map.getSize()-1){
+                    go(map);
+                }
+                else{
+                    pos[0]++;
+                    pos[1]++;
+                }
+                break;
+            }
+            case 6: {
+                if(pos[1]==0 || pos[0]== map.getSize()-1){
+                    go(map);
+                }
+                else{
+                    pos[0]++;
+                    pos[1]--;
+                }
+                break;
+            }
+            case 7: {
+                if(pos[1]== map.getSize()-1 || pos[0]==0){
+                    go(map);
+                }
+                else{
+                    pos[0]--;
+                    pos[1]++;
+                }
+                break;
+            }*/
         }
-
-//        switch (choice) {
-//            case 1:
-//                if (x < boardSize - 1) {
-//                    x++;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 2:
-//                if (y < boardSize - 1) {
-//                    y++;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 3:
-//                if (x < boardSize - 1 && y < boardSize - 1) {
-//                    x++;
-//                    y++;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 4:
-//                if (x<boardSize-1 && x>0) {
-//                    x--;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 5:
-//                if (y<boardSize-1 && y>0) {
-//                    y--;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 6:
-//                if (x<boardSize-1 && x>0 && y<boardSize-1 && y>0) {
-//                    x--;
-//                    y--;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 7:
-//                if (x==boardSize-1 && y<boardSize) {
-//                    y++;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 8:
-//                if (x==boardSize-1 && y<boardSize && y>0) {
-//                    y--;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 9:
-//                if (x<boardSize-1 && y==boardSize) {
-//                    x++;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 10:
-//                if (x<boardSize-1 && x>0 && y==boardSize) {
-//                    x--;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 11:
-//                if (x==boardSize-1 && y==boardSize) {
-//                    x--;
-//                    y--;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 12:
-//                if (x==boardSize-1 && y==boardSize) {
-//                    x--;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//            case 13:
-//                if (x==boardSize-1 && y==boardSize) {
-//                    y--;
-//                } else {
-//                    go(board1, boardSize);
-//                }
-//        }
     }
 
     public void setPosition(int x, int y){
