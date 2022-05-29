@@ -1,15 +1,18 @@
 import java.util.Scanner;
 
 public class Main {
-    static int amountOfMonkeys;
-    static int amountOfLions;
-    static int amountOfAdults;
-    static int amountOfChildren;
-    static int amountOfTarzans;
-    static int numberOfHidings;
 
-    public static void main(String[] args) {
+    int boardSize;
+    int amountOfMonkeys;
+    int amountOfLions;
+    int amountOfAdults;
+    int amountOfChildren;
+    int amountOfTarzans;
+    int numberOfHidings;
+    public void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        System.out.println("Podaj rozmiar mapy: ");
+        boardSize = scan.nextInt();
         System.out.println("Podaj ilość małp: ");
         amountOfMonkeys = scan.nextInt();
         System.out.println("Podaj ilość lwów: ");
