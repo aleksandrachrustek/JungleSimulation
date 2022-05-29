@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
 public class Main {
-
-    int boardSize;
     int amountOfMonkeys;
     int amountOfLions;
     int amountOfAdults;
@@ -12,7 +10,7 @@ public class Main {
     public void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj rozmiar mapy: ");
-        boardSize = scan.nextInt();
+        Simulation.mapSize = scan.nextInt();
         System.out.println("Podaj ilość małp: ");
         amountOfMonkeys = scan.nextInt();
         System.out.println("Podaj ilość lwów: ");
