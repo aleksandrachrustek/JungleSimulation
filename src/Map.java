@@ -57,8 +57,10 @@ public class Map {
         this.tarzan = new Tarzan(x, y);
         this.map[x][y] = "[T]";
 
+    }
 
-
+    public void update(){
+        tarzan.go(this);
     }
 
     public void show(){
@@ -68,6 +70,10 @@ public class Map {
             }
             System.out.println();
         }
+    }
+
+    public void setCharacter(int x, int y, String c){
+        this.map[x][y] = c;
     }
 
     public int getSize(){

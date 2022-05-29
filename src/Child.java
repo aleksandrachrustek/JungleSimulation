@@ -4,4 +4,6 @@ public class Child extends Human {
         super(x,y);
     }
 
+
+
 }

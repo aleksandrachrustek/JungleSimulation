@@ -4,11 +4,19 @@ public class Main {
 
 
     public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+
         Map map = new Map(5,1,0,2,2,0);
         map.show();
 
+        scan.nextByte();
+
+        map.update();
+        map.show();
+
         //wczytanie ilości agentów podanej przez użytkownika
-//        Scanner scan = new Scanner(System.in);
+
 //        System.out.println("Podaj rozmiar mapy: ");
 //        Simulation.boardSize = scan.nextInt();
 //        System.out.println("Podaj ilość małp: ");
