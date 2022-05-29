@@ -8,9 +8,11 @@ public class Simulation {
     static int amountOfTarzans;
     static int numberOfHidings;
 
-    String[][] board1 = new String[boardSize][boardSize];
+    //tworzenie tablicy dwuwymiarowej - planszy
+     String[][] board1 = new String[boardSize][boardSize];
 
-     public void boardDisplay() {
+    //wyświetlanie planszy
+    public void boardDisplay() {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 System.out.print("[" + board1[i][j] + "]");
@@ -18,8 +20,6 @@ public class Simulation {
             System.out.println();
         }
     }
-    
-
 
 
 }

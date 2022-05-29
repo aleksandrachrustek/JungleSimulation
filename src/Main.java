@@ -4,6 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //wczytanie ilości agentów podanej przez użytkownika
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj rozmiar mapy: ");
         Simulation.boardSize = scan.nextInt();
@@ -20,8 +21,6 @@ public class Main {
         System.out.println("Podaj ilość kryjówek: ");
         Simulation.numberOfHidings = scan.nextInt();
         scan.close();
-
-
 
     }
 }
