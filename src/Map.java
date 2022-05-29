@@ -12,7 +12,7 @@ public class Map {
     private ArrayList<Hiding> hidings = new ArrayList<Hiding>();
     private Tarzan tarzan;
 
-    public Map(int size, int numberOfMonkeys, int numberOfLions, int numberOfChildren, int numberOfAdults, int numberOfHidings){
+    public Map(int size, int amountOfMonkeys, int amountOfLions, int amountOfChildren, int amountOfAdults, int numberOfHidings){
 
         Random rand = new Random();
 
@@ -32,7 +32,7 @@ public class Map {
 //        }
 //
         int x, y;
-        for(int i=0; i<numberOfAdults; i++){
+        for(int i=0; i<amountOfAdults; i++){
             do {
                 x = rand.nextInt(size);
                 y = rand.nextInt(size);
@@ -41,7 +41,7 @@ public class Map {
             this.map[x][y] = "[A]";
         }
 
-        for(int i=0; i<numberOfChildren; i++){
+        for(int i=0; i<amountOfChildren; i++){
             do {
                 x = rand.nextInt(size - 1);
                 y = rand.nextInt(size - 1);
@@ -56,6 +56,23 @@ public class Map {
         }while(!this.map[x][y].equals("[ ]"));
         this.tarzan = new Tarzan(x, y);
         this.map[x][y] = "[T]";
+
+        for(int i=0; i<amountOfMonkeys; i++){
+            do {
+                x = rand.nextInt(size - 1);
+                y = rand.nextInt(size - 1);
+            }while(!this.map[x][y].equals("[ ]"));
+            this.monkeys.add(new Monkey(x,y));
+            this.map[x][y] = "[M]";
+        }
+        for(int i=0; i<amountOfLions; i++){
+            do {
+                x = rand.nextInt(size - 1);
+                y = rand.nextInt(size - 1);
+            }while(!this.map[x][y].equals("[ ]"));
+            this.lions.add(new Lion(x,y));
+            this.map[x][y] = "[L]";
+        }
 
     }
 
