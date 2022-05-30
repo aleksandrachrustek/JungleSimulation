@@ -18,4 +18,9 @@ abstract class Human extends Agent {
 
     }
 
+    @Override
+    public void go(Map map) {
+        super.go(map);
+    }
+
 }

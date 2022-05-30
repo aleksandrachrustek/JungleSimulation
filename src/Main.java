@@ -1,9 +1,11 @@
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Timer;
 
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         int size,count,amountOfMonkeys,amountOfLions,amountOfAdults,amountOfChildren,numberOfHidings;
 
@@ -28,12 +30,13 @@ public class Main {
         //stworzenie mapy o zadanych parametrach
         Map map = new Map(size,amountOfMonkeys,amountOfLions,amountOfChildren,amountOfAdults,numberOfHidings);
         map.show();
+        Thread.sleep(5000);
         //wyświetlanie zaktualizowanej mapy przez podaną ilość rund
         for(int i=1;i<=count;i++){
             System.out.println("Runda "+i+":");
             map.update();
             map.show();
+            Thread.sleep(5000);
         }
-
     }
 }

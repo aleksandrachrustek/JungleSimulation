@@ -6,4 +6,11 @@ public class Lion extends Animal {
     void kill() {
 
     }
+
+    @Override
+    public void go(Map map) {
+        map.setCharacter(getPosition()[0], getPosition()[1], "[ ]");
+        super.go(map);
+        map.setCharacter(getPosition()[0], getPosition()[1], "[L]");
+    }
 }
