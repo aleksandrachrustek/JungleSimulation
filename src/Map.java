@@ -62,6 +62,11 @@ public class Map {
             this.lions.add(new Lion(x,y));
             this.map[x][y] = "[L]";
         }
+        for(int i=0; i<numberOfHidings; i++){
+            Hiding.choosePlaces(size);
+            this.hidings.add(new Hiding(x,y));
+            this.map[x][y] = "[X]";
+        }
     }
 
     void findFreeSpace(){
