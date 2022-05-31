@@ -71,8 +71,8 @@ public class Map {
 
     void findFreeSpace(){
         do {
-            x = rand.nextInt(size);
-            y = rand.nextInt(size);
+            x = rand.nextInt(size-1);
+            y = rand.nextInt(size-1);
         }while(!this.map[y][x].equals("[ ]"));
     }
 
