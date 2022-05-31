@@ -2,7 +2,7 @@ import java.util.Random;
 abstract class Agent {
 
     private boolean hidden;
-    private int pos[] = new int [2];
+    private int[] pos = new int [2];
 
 
     Agent(int x, int y){
@@ -15,7 +15,7 @@ abstract class Agent {
     public void go(Map map) {
         Random rand = new Random();
         int dir = rand.nextInt(8);
-        
+
         switch (dir) {
             case 0 -> {
                 if (pos[0] == 0) {
