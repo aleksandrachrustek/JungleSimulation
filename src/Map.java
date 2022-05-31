@@ -7,8 +7,8 @@ public class Map {
     private String[][] map;
     private ArrayList<Monkey> monkeys = new ArrayList<>();
     private ArrayList<Lion> lions = new ArrayList<>();
-    private ArrayList<Child> children = new ArrayList<>();
     private ArrayList<Adult> adults = new ArrayList<>();
+    private ArrayList<Child> children = new ArrayList<>();
     private ArrayList<Hiding> hidings = new ArrayList<>();
     private Tarzan tarzan;
 
@@ -49,7 +49,7 @@ public class Map {
         }
 
         findFreeSpace();
-        this.tarzan = new Tarzan(x, y);
+        this.tarzan = new Tarzan(x,y);
         this.map[x][y] = "[T]";
 
         for(int i=0; i<amountOfMonkeys; i++){
@@ -63,7 +63,7 @@ public class Map {
             this.map[x][y] = "[L]";
         }
         for(int i=0; i<numberOfHidings; i++){
-            Hiding.choosePlaces(size);
+            choosePlaces();
             this.hidings.add(new Hiding(x,y));
             this.map[x][y] = "[X]";
         }
@@ -75,15 +75,19 @@ public class Map {
             y = rand.nextInt(size-1);
         }while(!this.map[y][x].equals("[ ]"));
     }
+    public void choosePlaces() {
+        Random rand = new Random();
+        x = rand.nextInt(size);
+        y = rand.nextInt(size);
+    }
 
     //zabezpieczyc przed brakiem akcji!!!!
-    public void update(){
+    public void update() {
         int chooseAgent;
         int agentNumber = -1;
 
-        while( agentNumber == -1 ) {
-
-            chooseAgent = rand.nextInt(5)+1;
+        while (agentNumber == -1) {
+            chooseAgent = rand.nextInt(5) + 1;
             switch (chooseAgent) {
                 case 1 -> {
                     System.out.println("Tarzan");
@@ -121,6 +125,7 @@ public class Map {
             }
         }
     }
+
 
     public void show(){
         for (int i=0; i<this.size; i++) {
