@@ -15,7 +15,7 @@ abstract class Agent {
     public void go(Map map) {
         Random rand = new Random();
         int dir = rand.nextInt(8);
-
+        
         switch (dir) {
             case 0 -> {
                 if (pos[0] == 0) {
