@@ -5,11 +5,11 @@ public class Map {
 
     private int size;
     private String[][] map;
-    private ArrayList<Monkey> monkeys = new ArrayList<Monkey>();
-    private ArrayList<Lion> lions = new ArrayList<Lion>();
-    private ArrayList<Child> children = new ArrayList<Child>();
-    private ArrayList<Adult> adults = new ArrayList<Adult>();
-    private ArrayList<Hiding> hidings = new ArrayList<Hiding>();
+    private ArrayList<Monkey> monkeys = new ArrayList<>();
+    private ArrayList<Lion> lions = new ArrayList<>();
+    private ArrayList<Child> children = new ArrayList<>();
+    private ArrayList<Adult> adults = new ArrayList<>();
+    private ArrayList<Hiding> hidings = new ArrayList<>();
     private Tarzan tarzan;
 
     private int x, y;
@@ -80,43 +80,38 @@ public class Map {
 
             chooseAgent = rand.nextInt(5)+1;
             switch (chooseAgent) {
-                case 1: {
+                case 1 -> {
                     System.out.println("Tarzan");
                     agentNumber = 0;
                     tarzan.go(this);
-                    break;
                 }
-                case 2: {
+                case 2 -> {
                     if (this.children.size() != 0) {
                         System.out.println("Child");
                         agentNumber = rand.nextInt(this.children.size());
                         this.children.get(agentNumber).go(this);
                     }
-                    break;
                 }
-                case 3: {
+                case 3 -> {
                     if (this.adults.size() != 0) {
                         System.out.println("Adults");
                         agentNumber = rand.nextInt(this.adults.size());
                         this.adults.get(agentNumber).go(this);
                     }
-                    break;
                 }
-                case 4: {
+                case 4 -> {
                     if (this.monkeys.size() != 0) {
                         System.out.println("Monkey");
                         agentNumber = rand.nextInt(this.monkeys.size());
                         this.monkeys.get(agentNumber).go(this);
                     }
-                    break;
                 }
-                case 5: {
+                case 5 -> {
                     if (this.lions.size() != 0) {
                         System.out.println("Lion");
                         agentNumber = rand.nextInt(this.lions.size());
                         this.lions.get(agentNumber).go(this);
                     }
-                    break;
                 }
             }
         }
