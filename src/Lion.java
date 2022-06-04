@@ -3,10 +3,6 @@ public class Lion extends Animal {
         super(x, y);
     }
 
-    void kill() {
-
-    }
-
     @Override
     public void go(Map map) {
         map.setCharacter(getPosition()[0], getPosition()[1], "[ ]");

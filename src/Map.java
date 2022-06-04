@@ -5,13 +5,7 @@ public class Map {
 
     private int size;
     private String[][] map;
-    private ArrayList<Monkey> monkeys = new ArrayList<>();
-    private ArrayList<Lion> lions = new ArrayList<>();
-    private ArrayList<Adult> adults = new ArrayList<>();
-    private ArrayList<Child> children = new ArrayList<>();
-    private ArrayList<Hiding> hidings = new ArrayList<>();
-    private Tarzan tarzan;
-
+    private ArrayList<Agent> agents = new ArrayList<>();
     private int x, y;
 
     Random rand;
@@ -19,7 +13,6 @@ public class Map {
     public Map(int size, int amountOfMonkeys, int amountOfLions, int amountOfChildren, int amountOfAdults, int numberOfHidings){
 
         rand = new Random();
-
         this.size = size;
         map = new String[this.size][this.size];
         for (int i=0; i<this.size; i++) {
@@ -27,48 +20,37 @@ public class Map {
                 this.map[i][j] = "[ ]";
             }
         }
-//        boolean tab[][] = new boolean[size][size];
-//
-//        for (int i=0; i<this.size; i++) {
-//            for (int j = 0; j < this.size; j++) {
-//                tab[i][j] = false;
-//            }
-//        }
-
-
         for(int i=0; i<amountOfAdults; i++){
             findFreeSpace();
-            this.adults.add(new Adult(x,y));
+            this.agents.add(new Adult(x,y));
             this.map[x][y] = "[A]";
         }
-
         for(int i=0; i<amountOfChildren; i++){
             findFreeSpace();
-            this.children.add(new Child(x,y));
+            this.agents.add(new Child(x,y));
             this.map[x][y] = "[C]";
         }
 
         findFreeSpace();
-        this.tarzan = new Tarzan(x,y);
+        this.agents.add(new Tarzan(x,y));
         this.map[x][y] = "[T]";
 
         for(int i=0; i<amountOfMonkeys; i++){
             findFreeSpace();
-            this.monkeys.add(new Monkey(x,y));
+            this.agents.add(new Monkey(x,y));
             this.map[x][y] = "[M]";
         }
         for(int i=0; i<amountOfLions; i++){
             findFreeSpace();
-            this.lions.add(new Lion(x,y));
+            this.agents.add(new Lion(x,y));
             this.map[x][y] = "[L]";
         }
         for(int i=0; i<numberOfHidings; i++){
             choosePlaces();
-            this.hidings.add(new Hiding(x,y));
+            this.agents.add(new Hiding(x,y));
             this.map[x][y] = "[X]";
         }
     }
-
     void findFreeSpace(){
         do {
             x = rand.nextInt(size-1);
@@ -81,51 +63,12 @@ public class Map {
         y = rand.nextInt(size);
     }
 
-    //zabezpieczyc przed brakiem akcji!!!!
     public void update() {
-        int chooseAgent;
-        int agentNumber = -1;
 
-        while (agentNumber == -1) {
-            chooseAgent = rand.nextInt(5) + 1;
-            switch (chooseAgent) {
-                case 1 -> {
-                    System.out.println("Tarzan");
-                    agentNumber = 0;
-                    tarzan.go(this);
-                }
-                case 2 -> {
-                    if (this.children.size() != 0) {
-                        System.out.println("Child");
-                        agentNumber = rand.nextInt(this.children.size());
-                        this.children.get(agentNumber).go(this);
-                    }
-                }
-                case 3 -> {
-                    if (this.adults.size() != 0) {
-                        System.out.println("Adults");
-                        agentNumber = rand.nextInt(this.adults.size());
-                        this.adults.get(agentNumber).go(this);
-                    }
-                }
-                case 4 -> {
-                    if (this.monkeys.size() != 0) {
-                        System.out.println("Monkey");
-                        agentNumber = rand.nextInt(this.monkeys.size());
-                        this.monkeys.get(agentNumber).go(this);
-                    }
-                }
-                case 5 -> {
-                    if (this.lions.size() != 0) {
-                        System.out.println("Lion");
-                        agentNumber = rand.nextInt(this.lions.size());
-                        this.lions.get(agentNumber).go(this);
-                    }
-                }
-            }
+        for (Agent agent : agents) {
+            agent.go(this);
         }
     }
-
 
     public void show(){
         for (int i=0; i<this.size; i++) {

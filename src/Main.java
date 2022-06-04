@@ -34,7 +34,6 @@ public class Main {
             System.out.println("Runda "+i+":");
             map.update();
             map.show();
-            Thread.sleep(2500);
         }
     }
 }

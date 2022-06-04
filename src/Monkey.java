@@ -3,10 +3,6 @@ public class Monkey extends Animal {
         super(x, y);
     }
 
-    void help() {
-
-    }
-
     @Override
     public void go(Map map) {
         map.setCharacter(getPosition()[0], getPosition()[1], "[ ]");
