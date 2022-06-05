@@ -33,6 +33,7 @@ public class Main {
         for(int i=1;i<=count;i++){
             System.out.println("Runda "+i+":");
             map.update();
+            //map.save();
             map.show();
             Thread.sleep(1000);
         }

@@ -3,14 +3,13 @@ abstract class Agent {
     protected String type;
     private boolean hidden;
     private int[] pos = new int [2];
-
     Agent(int x, int y){
         this.pos[0] = x;
         this.pos[1] = y;
         this.hidden=false;
     }
 
-    //0-left, 1-up, 2-right, 3-down, 4-up left, 5-down right, 6-up right, 7-down left
+    //poruszanie sie agentow
     public void go(Simulation map) {
         Random rand = new Random();
         int dir = rand.nextInt(8);
@@ -108,7 +107,4 @@ abstract class Agent {
     public String getType(){
         return this.type;
     }
-
-
-
 }
