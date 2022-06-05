@@ -3,15 +3,18 @@ abstract class Animal extends Agent{
         super(x, y);
     }
 
-    void die() {
-
-    }
     void copy() {
 
     }
+
     void hide() {
 
     }
+
+    void die() {
+
+    }
+
     @Override
     public void go(Simulation map) {
         super.go(map);

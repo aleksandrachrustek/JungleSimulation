@@ -28,12 +28,13 @@ public class Main {
         //stworzenie mapy o zadanych parametrach
         Simulation map = new Simulation(size,amountOfMonkeys,amountOfLions,amountOfChildren,amountOfAdults,numberOfHidings);
         map.show();
-        Thread.sleep(2500);
+        Thread.sleep(1000);
         //wyświetlanie zaktualizowanej mapy przez podaną ilość rund
         for(int i=1;i<=count;i++){
             System.out.println("Runda "+i+":");
             map.update();
             map.show();
+            Thread.sleep(1000);
         }
     }
 }

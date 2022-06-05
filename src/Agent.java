@@ -1,9 +1,8 @@
 import java.util.Random;
 abstract class Agent {
-
+    protected String type;
     private boolean hidden;
     private int[] pos = new int [2];
-
 
     Agent(int x, int y){
         this.pos[0] = x;
@@ -95,11 +94,19 @@ abstract class Agent {
         return this.pos;
     }
 
+    public void setPosition(int x, int y){
+        this.pos[0] = x;
+        this.pos[1] = y;
+    }
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
     public boolean isHidden(){
         return this.hidden;
+    }
+
+    public String getType(){
+        return this.type;
     }
 
 

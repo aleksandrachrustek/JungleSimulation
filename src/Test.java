@@ -1,8 +1,8 @@
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
-class Test {
-
-    @org.junit.jupiter.api.Test
-    void go() {
-    }
-}
+//class Test {
+//
+//    @org.junit.jupiter.api.Test
+//    void go() {
+//    }
+//}
