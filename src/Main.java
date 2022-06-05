@@ -26,7 +26,7 @@ public class Main {
         scan.close();
 
         //stworzenie mapy o zadanych parametrach
-        Map map = new Map(size,amountOfMonkeys,amountOfLions,amountOfChildren,amountOfAdults,numberOfHidings);
+        Simulation map = new Simulation(size,amountOfMonkeys,amountOfLions,amountOfChildren,amountOfAdults,numberOfHidings);
         map.show();
         Thread.sleep(2500);
         //wyświetlanie zaktualizowanej mapy przez podaną ilość rund

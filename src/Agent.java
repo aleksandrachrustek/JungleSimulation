@@ -12,7 +12,7 @@ abstract class Agent {
     }
 
     //0-left, 1-up, 2-right, 3-down, 4-up left, 5-down right, 6-up right, 7-down left
-    public void go(Map map) {
+    public void go(Simulation map) {
         Random rand = new Random();
         int dir = rand.nextInt(8);
 

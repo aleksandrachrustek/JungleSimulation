@@ -13,7 +13,7 @@ abstract class Animal extends Agent{
 
     }
     @Override
-    public void go(Map map) {
+    public void go(Simulation map) {
         super.go(map);
     }
 }

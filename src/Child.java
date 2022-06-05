@@ -5,7 +5,7 @@ public class Child extends Human {
     }
 
     @Override
-    public void go(Map map) {
+    public void go(Simulation map) {
         map.setCharacter(getPosition()[0], getPosition()[1], "[ ]");
         super.go(map);
         map.setCharacter(getPosition()[0], getPosition()[1], "[C]");
