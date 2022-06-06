@@ -3,8 +3,7 @@ import java.util.Random;
 abstract class Agent {
     private int age;
     protected String type;
-    private int[] pos = new int[2];
-
+    private final int[] pos = new int[2];
 
     Agent(int x, int y, int age) {
         pos[0] = x;
@@ -20,85 +19,66 @@ abstract class Agent {
         do {
             choice = rand.nextInt(8);
             switch (choice) {
-                case 0: {
+                case 0 -> {
                     if (!(pos[0] == 0)) {
                         pos[0]--;
-                    }
-                    else{
+                    } else {
                         choice = -1;
                     }
-                    break;
                 }
-                case 1: {
+                case 1 -> {
                     if (!(pos[1] == 0)) {
                         pos[1]--;
-                    }
-                    else{
+                    } else {
                         choice = -1;
                     }
-                    break;
                 }
-                case 2: {
+                case 2 -> {
                     if (!(pos[0] == map.getSize() - 1)) {
                         pos[0]++;
-                    }
-                    else{
+                    } else {
                         choice = -1;
                     }
-                    break;
                 }
-                case 3: {
+                case 3 -> {
                     if (!(pos[1] == map.getSize() - 1)) {
                         pos[1]++;
-                    }
-                    else{
+                    } else {
                         choice = -1;
                     }
-                    break;
                 }
-                case 4: {
+                case 4 -> {
                     if (pos[0] != 0 && pos[1] != 0) {
                         pos[0]--;
                         pos[1]--;
-                    }
-                    else{
+                    } else {
                         choice = -1;
                     }
-                    break;
                 }
-                case 5: {
+                case 5 -> {
                     if (pos[0] != map.getSize() - 1 && pos[1] != map.getSize() - 1) {
                         pos[0]++;
                         pos[1]++;
-                    }
-                    else{
+                    } else {
                         choice = -1;
                     }
-                    break;
                 }
-                case 6: {
+                case 6 -> {
                     if (pos[1] != 0 && pos[0] != map.getSize() - 1) {
                         pos[0]++;
                         pos[1]--;
-                    }
-                    else{
+                    } else {
                         choice = -1;
                     }
-                    break;
                 }
-                case 7: {
+                case 7 -> {
                     if (pos[1] != map.getSize() - 1 && pos[0] != 0) {
                         pos[0]--;
                         pos[1]++;
-                    }
-                    else{
+                    } else {
                         choice = -1;
                     }
-                    break;
                 }
-                default:
-                    choice = -1; // ???
-                    break;
             }
         } while (choice == -1);
     }
@@ -111,7 +91,6 @@ abstract class Agent {
         this.pos[0] = x;
         this.pos[1] = y;
     }
-
     public String getType() {
         return this.type;
     }
