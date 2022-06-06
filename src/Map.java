@@ -12,11 +12,29 @@ public class Map extends Simulation {
             //operacje na wieku
             if (type1.equals("ADULT") || type1.equals("CHILD")) {
                 int a = agent1.getAge();
-                agent1.setAge(a+1);
+                agent1.setAge(a+10);
+            }
+            if (type1.equals("MONKEY") || type1.equals("LION")) {
+                int a = agent1.getAge();
+                agent1.setAge(a+10);
             }
             if (type1.equals("ADULT")) {
                 int a = agent1.getAge();
-                if(a>=99) {
+                if(a>=71) {
+                    setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[ ]");
+                    Map.agents.remove(agent1);
+                }
+            }
+            if (type1.equals("LION")) {
+                int a = agent1.getAge();
+                if(a>=13) {
+                    setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[ ]");
+                    Map.agents.remove(agent1);
+                }
+            }
+            if (type1.equals("MONKEY")) {
+                int a = agent1.getAge();
+                if(a>=16) {
                     setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[ ]");
                     Map.agents.remove(agent1);
                 }
@@ -25,7 +43,7 @@ public class Map extends Simulation {
                 int a = agent1.getAge();
                 if(a>=18) {
                     setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[A]");
-                    Map.agents.add(new Adult(agent1.getPosition()[0],agent1.getPosition()[1]));
+                    Map.agents.add(new Adult(agent1.getPosition()[0],agent1.getPosition()[1],18));
                     Map.agents.remove(agent1);
                 }
             }
@@ -75,9 +93,9 @@ public class Map extends Simulation {
                             agent2.go(this);
                         }
                         if (type1.equals("ADULT") && type2.equals("CHILD")) {
-                                setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[C]");
-                                agent2.setPosition(agent1.getPosition()[0], agent1.getPosition()[1]);
-                                agent1.go(this);
+                            setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[C]");
+                            agent2.setPosition(agent1.getPosition()[0], agent1.getPosition()[1]);
+                            agent1.go(this);
                         }
                         //tarzan pomaga ludziom
                         if (type1.equals("ADULT") && type2.equals("TARZAN")) {
@@ -103,17 +121,17 @@ public class Map extends Simulation {
                         //funkcja copy
                         if (type1.equals("LION") && type2.equals("LION")) {
                             findFreeSpace();
-                            Map.agents.add(new Lion(x,y));
+                            Map.agents.add(new Lion(x,y,1));
                             this.map[x][y] = "[L]";
                         }
                         if (type1.equals("MONKEY") && type2.equals("MONKEY")) {
                             findFreeSpace();
-                            Map.agents.add(new Monkey(x,y));
+                            Map.agents.add(new Monkey(x,y,1));
                             this.map[x][y] = "[M]";
                         }
                         if (type1.equals("ADULT") && type2.equals("ADULT")) {
                             findFreeSpace();
-                            Map.agents.add(new Child(x,y));
+                            Map.agents.add(new Child(x,y,1));
                             this.map[x][y] = "[C]";
                         }
                     }
