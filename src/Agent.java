@@ -7,70 +7,104 @@ abstract class Agent {
 
 
     Agent(int x, int y, int age) {
-        this.pos[0] = x;
-        this.pos[1] = y;
+        pos[0] = x;
+        pos[1] = y;
         this.age = age;
     }
 
     //poruszanie sie agentow
     public void go(Simulation map) {
         Random rand = new Random();
-        int choice = rand.nextInt(8);
+        int choice;
 
         do {
+            choice = rand.nextInt(8);
             switch (choice) {
                 case 0: {
                     if (!(pos[0] == 0)) {
                         pos[0]--;
                     }
+                    else{
+                        choice = -1;
+                    }
+                    break;
                 }
                 case 1: {
                     if (!(pos[1] == 0)) {
                         pos[1]--;
                     }
+                    else{
+                        choice = -1;
+                    }
+                    break;
                 }
                 case 2: {
                     if (!(pos[0] == map.getSize() - 1)) {
                         pos[0]++;
                     }
+                    else{
+                        choice = -1;
+                    }
+                    break;
                 }
                 case 3: {
                     if (!(pos[1] == map.getSize() - 1)) {
                         pos[1]++;
                     }
+                    else{
+                        choice = -1;
+                    }
+                    break;
                 }
                 case 4: {
-                    if (!(pos[0] == 0 || pos[1] == 0)) {
+                    if (pos[0] != 0 && pos[1] != 0) {
                         pos[0]--;
                         pos[1]--;
                     }
+                    else{
+                        choice = -1;
+                    }
+                    break;
                 }
                 case 5: {
-                    if (!(pos[0] == map.getSize() - 1 || pos[1] == map.getSize() - 1)) {
+                    if (pos[0] != map.getSize() - 1 && pos[1] != map.getSize() - 1) {
                         pos[0]++;
                         pos[1]++;
                     }
+                    else{
+                        choice = -1;
+                    }
+                    break;
                 }
                 case 6: {
-                    if (!(pos[1] == 0 || pos[0] == map.getSize() - 1)) {
+                    if (pos[1] != 0 && pos[0] != map.getSize() - 1) {
                         pos[0]++;
                         pos[1]--;
                     }
+                    else{
+                        choice = -1;
+                    }
+                    break;
                 }
                 case 7: {
-                    if (!(pos[1] == map.getSize() - 1 || pos[0] == 0)) {
+                    if (pos[1] != map.getSize() - 1 && pos[0] != 0) {
                         pos[0]--;
                         pos[1]++;
                     }
+                    else{
+                        choice = -1;
+                    }
+                    break;
                 }
                 default:
-                    choice = -1;
+                    choice = -1; // ???
+                    break;
             }
-        } while (choice != -1);
+        } while (choice == -1);
     }
 
     public int[] getPosition() {
-        return this.pos;
+        return pos;
     }
 
     public void setPosition(int x, int y) {
@@ -83,7 +117,7 @@ abstract class Agent {
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
     public void setAge(int age) {
         this.age = age;
