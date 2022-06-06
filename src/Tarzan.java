@@ -1,6 +1,6 @@
 public class Tarzan extends Agent {
-    Tarzan(int x, int y){
-        super(x, y);
+    Tarzan(int x, int y, int age){
+        super(x, y, age);
         this.type = "TARZAN";
     }
 

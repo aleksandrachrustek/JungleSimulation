@@ -28,31 +28,31 @@ public class Simulation {
         //rozmieszczenie zadanej przez użytkownika ilosci agentow na mapie
         for(int i=0; i<amountOfAdults; i++){
             findFreeSpace();
-            Map.agents.add(new Adult(x,y));
+            Map.agents.add(new Adult(x,y,18));
             this.map[x][y] = "[A]";
         }
         for(int i=0; i<amountOfChildren; i++){
             findFreeSpace();
-            Map.agents.add(new Child(x,y));
+            Map.agents.add(new Child(x,y,1));
             this.map[x][y] = "[C]";
         }
         findFreeSpace();
-        Map.agents.add(new Tarzan(x,y));
+        Map.agents.add(new Tarzan(x,y,100));
         this.map[x][y] = "[T]";
         for(int i=0; i<amountOfMonkeys; i++){
             findFreeSpace();
-            Map.agents.add(new Monkey(x,y));
+            Map.agents.add(new Monkey(x,y,1));
             this.map[x][y] = "[M]";
         }
         for(int i=0; i<amountOfLions; i++){
             findFreeSpace();
-            Map.agents.add(new Lion(x,y));
+            Map.agents.add(new Lion(x,y,1));
             this.map[x][y] = "[L]";
         }
         for(int i=0; i<numberOfHidings; i++){
             findFreeSpace();
             choosePlaces();
-            Map.agents.add(new Hiding(x,y));
+            Map.agents.add(new Hiding(x,y,0));
             this.map[x][y] = "[X]";
         }
     }
@@ -105,7 +105,7 @@ public class Simulation {
     public void update() {
         for (Agent agent : Map.agents) {
             agent.go(this);
-            //wywolanie interakcji
+            //wywolanie metody interakcje
             String type = agent.getType();
             if(type.equals("MONKEY")){
                 monkeysCount++;

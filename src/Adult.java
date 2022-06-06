@@ -1,8 +1,7 @@
 public class Adult extends Human {
-    public Adult(int x, int y){
-        super(x,y);
-        this.age=18;
-        this.type="ADULT";
+    public Adult(int x, int y, int age){
+        super(x,y,age);
+        this.type = "ADULT";
     }
     @Override
     public void go(Simulation map) {

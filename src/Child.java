@@ -1,7 +1,6 @@
 public class Child extends Human {
-    Child(int x, int y){
-        super(x,y);
-        this.age=1;
+    Child(int x, int y, int age){
+        super(x,y,age);
         this.type = "CHILD";
     }
     @Override

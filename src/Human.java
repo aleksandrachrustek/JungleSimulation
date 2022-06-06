@@ -1,9 +1,6 @@
 abstract class Human extends Agent {
-
-    protected int age;
-    public Human(int x, int y){
-        super(x,y);
-        this.age = age;
+    public Human(int x, int y, int age){
+        super(x,y,age);
     }
     @Override
     public void go(Simulation map) {
