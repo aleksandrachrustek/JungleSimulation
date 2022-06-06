@@ -3,7 +3,6 @@ public class Lion extends Animal {
         super(x, y);
         this.type = "LION";
     }
-
     @Override
     public void go(Simulation map) {
         map.setCharacter(getPosition()[0], getPosition()[1], "[ ]");

@@ -1,12 +1,14 @@
 import java.util.Random;
 abstract class Agent {
+    private int age;
     protected String type;
-    private boolean hidden;
-    private int[] pos = new int [2];
-    Agent(int x, int y){
+    private int[] pos = new int[2];
+
+
+    Agent(int x, int y) {
         this.pos[0] = x;
         this.pos[1] = y;
-        this.hidden=false;
+        this.age = age;
     }
 
     //poruszanie sie agentow
@@ -89,22 +91,23 @@ abstract class Agent {
         } while (a == 0);
     }
 
-    public int[] getPosition(){
+    public int[] getPosition() {
         return this.pos;
     }
 
-    public void setPosition(int x, int y){
+    public void setPosition(int x, int y) {
         this.pos[0] = x;
         this.pos[1] = y;
     }
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
-    public boolean isHidden(){
-        return this.hidden;
+
+    public String getType() {
+        return this.type;
     }
 
-    public String getType(){
-        return this.type;
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
     }
 }

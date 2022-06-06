@@ -1,7 +1,8 @@
 public class Adult extends Human {
-    private int age=18;
     public Adult(int x, int y){
         super(x,y);
+        this.age=18;
+        this.type="ADULT";
     }
     @Override
     public void go(Simulation map) {
@@ -9,11 +10,4 @@ public class Adult extends Human {
         super.go(map);
         map.setCharacter(getPosition()[0], getPosition()[1], "[A]");
     }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-
 }

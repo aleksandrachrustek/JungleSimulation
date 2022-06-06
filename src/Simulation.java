@@ -51,7 +51,7 @@ public class Simulation {
         }
         for(int i=0; i<numberOfHidings; i++){
             findFreeSpace();
-            //            choosePlaces();
+            choosePlaces();
             Map.agents.add(new Hiding(x,y));
             this.map[x][y] = "[X]";
         }
@@ -94,12 +94,12 @@ public class Simulation {
             x = rand.nextInt(size-1);
             y = rand.nextInt(size-1);
         }while(!this.map[y][x].equals("[ ]"));
-    }/*
+    }
    public void choosePlaces() {
        Random rand = new Random();
        x = rand.nextInt(size);
        y = rand.nextInt(size);
-   }*/
+   }
 
     //aktualizowanie mapy i zliczanie ilosc agentow
     public void update() {
