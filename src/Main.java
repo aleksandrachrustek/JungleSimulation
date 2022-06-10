@@ -6,28 +6,29 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
-        int size,count,amountOfMonkeys,amountOfLions,amountOfAdults,amountOfChildren,numberOfHidings;
+        int size,count;
+        int [] amounts= new int[5];
 
         //wczytanie ilości agentów podanej przez użytkownika
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj rozmiar mapy: ");
         size = scan.nextInt();
         System.out.println("Podaj ilość małp: ");
-        amountOfMonkeys = scan.nextInt();
+        amounts[0] = scan.nextInt();
         System.out.println("Podaj ilość lwów: ");
-        amountOfLions = scan.nextInt();
+        amounts[1] = scan.nextInt();
         System.out.println("Podaj ilość dorosłych: ");
-        amountOfAdults = scan.nextInt();
+        amounts[2] = scan.nextInt();
         System.out.println("Podaj ilość dzieci: ");
-        amountOfChildren = scan.nextInt();
+        amounts[3] = scan.nextInt();
         System.out.println("Podaj ilość kryjówek: ");
-        numberOfHidings = scan.nextInt();
+        amounts[4] = scan.nextInt();
         System.out.println("Podaj ilość rund do rozegrania: ");
         count = scan.nextInt();
         scan.close();
 
         //stworzenie mapy o zadanych parametrach
-        Simulation map = new Simulation(size,amountOfMonkeys,amountOfLions,amountOfChildren,amountOfAdults,numberOfHidings);
+        Simulation map = new Simulation(size,amounts);//amountOfMonkeys,amountOfLions,amountOfChildren,amountOfAdults,numberOfHidings);
         map.show();
         Thread.sleep(1000);
         //wyświetlanie zaktualizowanej mapy przez podaną ilość rund
@@ -35,7 +36,7 @@ public class Main {
             System.out.println("Runda "+i+":");
             map.update();
             map.show();
-            Thread.sleep(300);
+            Thread.sleep(250);
         }
     }
 }
