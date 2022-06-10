@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Simulation {
-    private int size;
+    private final int size;
     String[][] map;
-    int x, y, adultsCount, childrenCount, monkeysCount, lionsCount;
+    int x, y;
+    int[] count;
     Random rand;
     PrintWriter saver = new PrintWriter("dane.txt");
     ArrayList<Agent> toRemove;
     ArrayList<Agent> toAdd;
-    public Simulation() throws FileNotFoundException {}
 
-    public Simulation(int size, int amountOfMonkeys, int amountOfLions, int amountOfChildren, int amountOfAdults, int numberOfHidings) throws FileNotFoundException {
-
+    public Simulation(int size, int[] amounts) throws FileNotFoundException {//int size, int amountOfMonkeys, int amountOfLions, int amountOfChildren, int amountOfAdults, int numberOfHidings) throws FileNotFoundException {
         rand = new Random();
         this.size = size;
 
@@ -26,100 +25,80 @@ public class Simulation {
             }
         }
         //rozmieszczenie zadanej przez użytkownika ilosci agentow na mapie
-        for(int i=0; i<amountOfAdults; i++){
-            findFreeSpace();
-            Map.agents.add(new Adult(x,y,18));
-            this.map[x][y] = "[A]";
-        }
-        for(int i=0; i<amountOfChildren; i++){
-            findFreeSpace();
-            Map.agents.add(new Child(x,y,1));
-            this.map[x][y] = "[C]";
-        }
-        findFreeSpace();
-        Map.agents.add(new Tarzan(x,y,100));
-        this.map[x][y] = "[T]";
-        for(int i=0; i<amountOfMonkeys; i++){
+        for(int i=0; i<amounts[0]; i++){
             findFreeSpace();
             Map.agents.add(new Monkey(x,y,1));
             this.map[x][y] = "[M]";
         }
-        for(int i=0; i<amountOfLions; i++){
+        for(int i=0; i<amounts[1]; i++){
             findFreeSpace();
             Map.agents.add(new Lion(x,y,1));
             this.map[x][y] = "[L]";
         }
-        for(int i=0; i<numberOfHidings; i++){
+        for(int i=0; i<amounts[2]; i++){
+            findFreeSpace();
+            Map.agents.add(new Adult(x,y,18));
+            this.map[x][y] = "[A]";
+        }
+        for(int i=0; i<amounts[3]; i++){
+            findFreeSpace();
+            Map.agents.add(new Child(x,y,1));
+            this.map[x][y] = "[C]";
+        }
+        for(int i=0; i<amounts[4]; i++){
             findFreeSpace();
             Map.agents.add(new Hiding(x,y,0));
             this.map[x][y] = "[X]";
         }
+        findFreeSpace();
+        Map.agents.add(new Tarzan(x,y,100));
+        this.map[x][y] = "[T]";
     }
     //interakcje miedzy agentami
     public void interactions(Agent agent1) {
 
         String type1 = agent1.getType();
         //operacje na wieku
-            if (type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY") || type1.equals("LION")) {
-                agent1.setAge(agent1.getAge()+2);
-            }
-            if (type1.equals("ADULT")) {
-                if(agent1.getAge()>=70) {
-                    setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[ ]");
-                    toRemove.add(agent1);
-                }
-            }
-            if (type1.equals("LION")) {
-                if(agent1.getAge()>=15) {
-                    setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[ ]");
-                    toRemove.add(agent1);
-                }
-            }
-            if (type1.equals("MONKEY")) {
-                if(agent1.getAge()>=20) {
-                    setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[ ]");
-                    toRemove.add(agent1);
-                }
-            }
-            if (type1.equals("CHILD")) {
-                if(agent1.getAge()>=18) {
-                    setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[A]");
-                    toAdd.add(new Adult(agent1.getPosition()[0],agent1.getPosition()[1],18));
-                    toRemove.add(agent1);
-                }
-            }
+        if (type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY") || type1.equals("LION")) {
+            agent1.setAge(agent1.getAge() + 2);
+        }
+        if (type1.equals("ADULT") && agent1.getAge() >= 70) {
+            setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[ ]");
+            toRemove.add(agent1);
+        } else if (type1.equals("LION") && agent1.getAge() >= 15) {
+            setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[ ]");
+            toRemove.add(agent1);
+        } else if (type1.equals("MONKEY") && agent1.getAge() >= 20) {
+            setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[ ]");
+            toRemove.add(agent1);
+        } else if (type1.equals("CHILD") && agent1.getAge() >= 18) {
+            setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[A]");
+            toAdd.add(new Adult(agent1.getPosition()[0], agent1.getPosition()[1], 18));
+            toRemove.add(agent1);
+        }
         for (Agent agent2 : Map.agents) {
             if (agent1 != agent2) {
                 String type2 = agent2.getType();
                 if (agent1.getPosition()[0] == agent2.getPosition()[0] && agent1.getPosition()[1] == agent2.getPosition()[1]) {
                     //kryjowka
-                    if ((type1.equals("ADULT")||type1.equals("CHILD")||type1.equals("MONKEY")) && type2.equals("HIDING")) {
+                    if ((type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY")) && type2.equals("HIDING")) {
                         setCharacter(agent2.getPosition()[0], agent2.getPosition()[1], "[X]");
-                            for (Agent agent3 : Map.agents) {
-                                if (agent3.getType().equals("LION")) {
-                                    findNearestFreeSpace(agent3.getPosition()[0],agent1.getPosition()[1]);
-                                    agent3.setPosition(x,y);
-                                    setCharacter(x,y,"[L]");
-                                }
+                        for (Agent agent3 : Map.agents) {
+                            if (agent3.getType().equals("LION")) {
+                                findNearestFreeSpace(agent3.getPosition()[0], agent1.getPosition()[1]);
+                                agent3.setPosition(x, y);
+                                setCharacter(x, y, "[L]");
                             }
-                    }
-                    else if (type1.equals("LION") && type2.equals("HIDING")){
+                        }
+                    } else if (type1.equals("LION") && type2.equals("HIDING")) {
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
-                        agent1.setPosition(x,y);
+                        agent1.setPosition(x, y);
                         setCharacter(x, y, "[L]");
                     }
                     //funkcja kill
-                    if (type1.equals("MONKEY") && type2.equals("LION")) {
+                    if ((type1.equals("MONKEY") || type1.equals("ADULT") || type1.equals("CHILD")) && type2.equals("LION")) {
                         setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[L]");
                         toRemove.add(agent1);
-                    }
-                    if (type1.equals("LION") && type2.equals("ADULT")) {
-                        setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[L]");
-                        toRemove.add(agent2);
-                    }
-                    if (type1.equals("LION") && type2.equals("CHILD")) {
-                        setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[L]");
-                        toRemove.add(agent2);
                     }
                     if (type1.equals("LION") && type2.equals("TARZAN")) {
                         setCharacter(agent2.getPosition()[0], agent2.getPosition()[1], "[T]");
@@ -128,15 +107,15 @@ public class Simulation {
                     //ponowny ruch agentow nie zabijajacych sie nawzajem
                     if (type1.equals("MONKEY") && type2.equals("ADULT")) {
                         setCharacter(agent2.getPosition()[0], agent2.getPosition()[1], "[A]");
-                        findNearestFreeSpace(agent1.getPosition()[0],agent1.getPosition()[1]);
-                        agent1.setPosition(x,y);
-                        setCharacter(x,y,"[M]");
+                        findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
+                        agent1.setPosition(x, y);
+                        setCharacter(x, y, "[M]");
                     }
                     if (type1.equals("MONKEY") && type2.equals("CHILD")) {
                         setCharacter(agent2.getPosition()[0], agent2.getPosition()[1], "[C]");
-                        findNearestFreeSpace(agent1.getPosition()[0],agent1.getPosition()[1]);
-                        agent1.setPosition(x,y);
-                        setCharacter(x,y,"[M]");
+                        findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
+                        agent1.setPosition(x, y);
+                        setCharacter(x, y, "[M]");
                     }
                     if (type1.equals("MONKEY") && type2.equals("TARZAN")) {
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
@@ -147,7 +126,7 @@ public class Simulation {
                     if (type1.equals("ADULT") && type2.equals("CHILD")) {
                         setCharacter(agent2.getPosition()[0], agent2.getPosition()[1], "[C]");
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
-                        agent1.setPosition(x,y);
+                        agent1.setPosition(x, y);
                         setCharacter(x, y, "[A]");
                     }
                     //tarzan pomaga ludziom
@@ -158,7 +137,7 @@ public class Simulation {
                                 agent1.setPosition(agent3.getPosition()[0], agent3.getPosition()[1]);
                                 setCharacter(agent3.getPosition()[0], agent3.getPosition()[1], "[A]");
                                 findNearestFreeSpace(agent3.getPosition()[0], agent3.getPosition()[1]);
-                                agent3.setPosition(x,y);
+                                agent3.setPosition(x, y);
                                 setCharacter(x, y, "[M]");
                             }
                         }
@@ -170,7 +149,7 @@ public class Simulation {
                                 agent1.setPosition(agent3.getPosition()[0], agent3.getPosition()[1]);
                                 setCharacter(agent3.getPosition()[0], agent3.getPosition()[1], "[C]");
                                 findNearestFreeSpace(agent3.getPosition()[0], agent3.getPosition()[1]);
-                                agent3.setPosition(x,y);
+                                agent3.setPosition(x, y);
                                 setCharacter(x, y, "[M]");
                             }
                         }
@@ -178,17 +157,17 @@ public class Simulation {
                     //funkcja copy
                     if (type1.equals("LION") && type2.equals("LION")) {
                         findFreeSpace();
-                        toAdd.add(new Lion(x,y,1));
+                        toAdd.add(new Lion(x, y, 1));
                         this.map[x][y] = "[L]";
                     }
                     if (type1.equals("MONKEY") && type2.equals("MONKEY")) {
                         findFreeSpace();
-                        toAdd.add(new Monkey(x,y,1));
+                        toAdd.add(new Monkey(x, y, 1));
                         this.map[x][y] = "[M]";
                     }
                     if (type1.equals("ADULT") && type2.equals("ADULT")) {
                         findFreeSpace();
-                        toAdd.add(new Child(x,y,1));
+                        toAdd.add(new Child(x, y, 1));
                         this.map[x][y] = "[C]";
                     }
                 }
@@ -224,28 +203,25 @@ public class Simulation {
     public void update() {
         toRemove = new ArrayList<>();
         toAdd = new ArrayList<>();
+        count = new int[4];
         for (Agent agent : Map.agents) {
             agent.go(this);
             interactions(agent);
             String type = agent.getType();
-            if(type.equals("MONKEY")){
-                monkeysCount++;
-            }
-            if(type.equals("LION")){
-                lionsCount++;
-            }
-            if(type.equals("ADULT")){
-                adultsCount++;
-            }
-            if(type.equals("CHILD")) {
-                childrenCount++;
+            switch (type) {
+                case "MONKEY" -> count[0]++;
+                case "LION" -> count[1]++;
+                case "ADULT" -> count[2]++;
+                case "CHILD" -> count[3]++;
             }
         }
         Map.agents.removeAll(toRemove);
         Map.agents.addAll(toAdd);
         save();
-    }
+        toRemove.clear();
+        toAdd.clear();
 
+    }
     //wyswietlanie mapy
     public void show(){
         for (int i=0; i<this.size; i++) {
@@ -255,16 +231,13 @@ public class Simulation {
             System.out.println();
         }
     }
-
     //zapis ilosci agentow do pliku
     public void save() {
-        saver.flush();
-        saver.append(String.valueOf(adultsCount)).append(" ");
-        saver.append(String.valueOf(childrenCount)).append(" ");
-        saver.append(String.valueOf(monkeysCount)).append(" ");
-        saver.append(String.valueOf(lionsCount));
+        saver.append(String.valueOf(count[0])).append(" ");
+        saver.append(String.valueOf(count[1])).append(" ");
+        saver.append(String.valueOf(count[2])).append(" ");
+        saver.append(String.valueOf(count[3]));
         saver.append("\n");
-        saver.close();
     }
     public void setCharacter(int x, int y, String c){
         this.map[x][y] = c;
