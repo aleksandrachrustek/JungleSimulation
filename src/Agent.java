@@ -24,7 +24,6 @@ abstract class Agent {
         else // begin == 1 -> end = 2
             end = begin + 1;
 
-
        for(int i=begin; i<end; i++) {
            do {
                choice = rand.nextInt(2);

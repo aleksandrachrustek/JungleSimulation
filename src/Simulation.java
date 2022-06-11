@@ -83,13 +83,13 @@ public class Simulation {
                     //kryjowka
                     if ((type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY")) && type2.equals("HIDING")) {
                         setCharacter(agent2.getPosition()[0], agent2.getPosition()[1], "[X]");
-                        for (Agent agent3 : Map.agents) {
-                            if (agent3.getType().equals("LION")) {
-                                findNearestFreeSpace(agent3.getPosition()[0], agent1.getPosition()[1]);
-                                agent3.setPosition(x, y);
-                                setCharacter(x, y, "[L]");
-                            }
-                        }
+//                        for (Agent agent3 : Map.agents) {
+//                            if (agent3.getType().equals("LION")) {
+//                                findNearestFreeSpace(agent3.getPosition()[0], agent3.getPosition()[1]);
+//                                agent3.setPosition(x, y);
+//                                setCharacter(x, y, "[L]");
+//                            }
+//                        }
                     } else if (type1.equals("LION") && type2.equals("HIDING")) {
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
                         agent1.setPosition(x, y);
@@ -173,6 +173,12 @@ public class Simulation {
                 }
             }
         }
+        // Zeby nie znikaly kryjowki
+//        for (Agent agent : Map.agents) {
+//            if (agent.getType().equals("HIDING")) {
+//                setCharacter(agent.getPosition()[0], agent.getPosition()[1], "[X]");
+//            }
+//        }
     }
 
     void findNearestFreeSpace(int x0, int y0){
@@ -191,6 +197,7 @@ public class Simulation {
                 }
             }
         }
+        findFreeSpace(); // jezeli nie ma wolnego miejsca wokol (x0,y0)
     }
     void findFreeSpace(){
         do {
