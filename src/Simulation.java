@@ -58,6 +58,9 @@ public class Simulation {
     public void interactions(Agent agent1) {
 
         String type1 = agent1.getType();
+        if (agent1.getType().equals("HIDING")) {
+            setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[X]");
+        }
         //operacje na wieku
         if (type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY") || type1.equals("LION")) {
             agent1.setAge(agent1.getAge() + 2);
@@ -173,12 +176,6 @@ public class Simulation {
                 }
             }
         }
-        // Zeby nie znikaly kryjowki
-//        for (Agent agent : Map.agents) {
-//            if (agent.getType().equals("HIDING")) {
-//                setCharacter(agent.getPosition()[0], agent.getPosition()[1], "[X]");
-//            }
-//        }
     }
 
     void findNearestFreeSpace(int x0, int y0){
@@ -212,9 +209,9 @@ public class Simulation {
         toAdd = new ArrayList<>();
         count = new int[4];
         for (Agent agent : Map.agents) {
-            agent.go(this);
-            interactions(agent);
             String type = agent.getType();
+            if(type!="HIDING") agent.go(this);
+            interactions(agent);
             switch (type) {
                 case "MONKEY" -> count[0]++;
                 case "LION" -> count[1]++;
