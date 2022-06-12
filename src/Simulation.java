@@ -219,14 +219,40 @@ public class Simulation {
         toAdd.clear();
         for (Agent agent : Map.agents) {
             String type = agent.getType();
-            switch (type) {
-                case "MONKEY" -> count[0]++;
-                case "LION" -> count[1]++;
-                case "ADULT" -> count[2]++;
-                case "CHILD" -> count[3]++;
-            }
+            // niekoniecznie musi dzialac porownywanie stringow
+//            switch (type) {
+//                case "MONKEY" -> count[0]++;
+//                case "LION" -> count[1]++;
+//                case "ADULT" -> count[2]++;
+//                case "CHILD" -> count[3]++;
+//            }
+            if(type.equals("MONKEY")) count[0]++;
+            else if(type.equals("LION")) count[1]++;
+            else if(type.equals("ADULT")) count[2]++;
+            else if(type.equals("CHILD")) count[3]++;
         }
         save(count);
+        for(int i=0; i<size; i++){
+            for(int j=0; j<size; j++){
+                this.map[i][j] = "[ ]";
+            }
+        }
+        for(Agent agent : Map.agents){
+            int xx = agent.getPosition()[0];
+            int yy = agent.getPosition()[1];
+            String type = agent.getType();
+
+            if(type.equals("MONKEY")) setCharacter(xx,yy,"[M]");
+            else if(type.equals("LION")) setCharacter(xx,yy,"[L]");
+            else if(type.equals("ADULT")) setCharacter(xx,yy,"[A]");
+            else if(type.equals("CHILD")) setCharacter(xx,yy,"[C]");
+            else if(type.equals("TARZAN")) setCharacter(xx,yy,"[T]");
+        }
+        for(Agent agent : Map.agents){
+            if(agent.getType().equals("HIDING")){
+                setCharacter(agent.getPosition()[0], agent.getPosition()[1], "[X]");
+            }
+        }
     }
     //wyswietlanie mapy
     public void show(){
