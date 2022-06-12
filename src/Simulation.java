@@ -7,13 +7,13 @@ public class Simulation {
     private final int size;
     String[][] map;
     int x, y;
+    PrintWriter saver = new PrintWriter("dane.txt");
     int[] count;
     Random rand;
-    PrintWriter saver = new PrintWriter("dane.txt");
     ArrayList<Agent> toRemove;
     ArrayList<Agent> toAdd;
 
-    public Simulation(int size, int[] amounts) throws FileNotFoundException {//int size, int amountOfMonkeys, int amountOfLions, int amountOfChildren, int amountOfAdults, int numberOfHidings) throws FileNotFoundException {
+    public Simulation(int size, int[] amounts) throws FileNotFoundException {
         rand = new Random();
         this.size = size;
 
@@ -200,18 +200,25 @@ public class Simulation {
         do {
             x = rand.nextInt(size);
             y = rand.nextInt(size);
-        }while(!this.map[y][x].equals("[ ]"));
+        } while(!this.map[y][x].equals("[ ]"));
     }
 
     //aktualizowanie mapy i zliczanie ilosc agentow
     public void update() {
         toRemove = new ArrayList<>();
         toAdd = new ArrayList<>();
-        count = new int[4];
+        count = new int[]{0, 0, 0, 0};
         for (Agent agent : Map.agents) {
             String type = agent.getType();
-            if(type!="HIDING") agent.go(this);
+            if(!type.equals("HIDING")) agent.go(this);
             interactions(agent);
+        }
+        Map.agents.removeAll(toRemove);
+        Map.agents.addAll(toAdd);
+        toRemove.clear();
+        toAdd.clear();
+        for (Agent agent : Map.agents) {
+            String type = agent.getType();
             switch (type) {
                 case "MONKEY" -> count[0]++;
                 case "LION" -> count[1]++;
@@ -219,12 +226,7 @@ public class Simulation {
                 case "CHILD" -> count[3]++;
             }
         }
-        Map.agents.removeAll(toRemove);
-        Map.agents.addAll(toAdd);
-        save();
-        toRemove.clear();
-        toAdd.clear();
-
+        save(count);
     }
     //wyswietlanie mapy
     public void show(){
@@ -236,12 +238,12 @@ public class Simulation {
         }
     }
     //zapis ilosci agentow do pliku
-    public void save() {
-        saver.append(String.valueOf(count[0])).append(" ");
-        saver.append(String.valueOf(count[1])).append(" ");
-        saver.append(String.valueOf(count[2])).append(" ");
-        saver.append(String.valueOf(count[3]));
-        saver.append("\n");
+    public void save(int[] c) {
+        saver.append(String.valueOf(c[0])).append(" ");
+        saver.append(String.valueOf(c[1])).append(" ");
+        saver.append(String.valueOf(c[2])).append(" ");
+        saver.append(String.valueOf(c[3])).append("\n");
+        saver.flush();
     }
     public void setCharacter(int x, int y, String c){
         this.map[x][y] = c;
