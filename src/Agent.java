@@ -56,7 +56,6 @@ abstract class Agent {
                     } else {
                         choice = -1;
                     }
-                    break;
                 }
                 case 1 -> {
                     if (!(pos[1] == 0)) {
@@ -64,7 +63,6 @@ abstract class Agent {
                     } else {
                         choice = -1;
                     }
-                    break;
                 }
                 case 2 -> {
                     if (!(pos[0] == map.getSize() - 1)) {
@@ -72,7 +70,6 @@ abstract class Agent {
                     } else {
                         choice = -1;
                     }
-                    break;
                 }
                 case 3 -> {
                     if (!(pos[1] == map.getSize() - 1)) {
@@ -80,7 +77,6 @@ abstract class Agent {
                     } else {
                         choice = -1;
                     }
-                    break;
                 }
                 case 4 -> {
                     if (pos[0] != 0 && pos[1] != 0) {
@@ -89,7 +85,6 @@ abstract class Agent {
                     } else {
                         choice = -1;
                     }
-                    break;
                 }
                 case 5 -> {
                     if (pos[0] != map.getSize() - 1 && pos[1] != map.getSize() - 1) {
@@ -98,7 +93,6 @@ abstract class Agent {
                     } else {
                         choice = -1;
                     }
-                    break;
                 }
                 case 6 -> {
                     if (pos[1] != 0 && pos[0] != map.getSize() - 1) {
@@ -107,7 +101,6 @@ abstract class Agent {
                     } else {
                         choice = -1;
                     }
-                    break;
                 }
                 case 7 -> {
                     if (pos[1] != map.getSize() - 1 && pos[0] != 0) {
@@ -116,7 +109,6 @@ abstract class Agent {
                     } else {
                         choice = -1;
                     }
-                    break;
                 }
             }
         } while (choice == -1);
