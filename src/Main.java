@@ -13,22 +13,22 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj rozmiar mapy: ");
         size = scan.nextInt();
-        System.out.println("Podaj ilość małp: ");
+        System.out.println("Podaj ilość małp (nie może przekraczać "+size*size+"): ");
         amounts[0] = scan.nextInt();
-        System.out.println("Podaj ilość lwów: ");
+        System.out.println("Podaj ilość lwów (nie może przekraczać "+(size*size-amounts[0])+"): ");
         amounts[1] = scan.nextInt();
-        System.out.println("Podaj ilość dorosłych: ");
+        System.out.println("Podaj ilość dorosłych (nie może przekraczać "+(size*size-amounts[0]-amounts[1])+"): ");
         amounts[2] = scan.nextInt();
-        System.out.println("Podaj ilość dzieci: ");
+        System.out.println("Podaj ilość dzieci (nie może przekraczać "+(size*size-amounts[0]-amounts[1]-amounts[2])+"): ");
         amounts[3] = scan.nextInt();
-        System.out.println("Podaj ilość kryjówek: ");
+        System.out.println("Podaj ilość kryjówek (nie może przekraczać "+(size*size-amounts[0]-amounts[1]-amounts[2]-amounts[3])+"): ");
         amounts[4] = scan.nextInt();
         System.out.println("Podaj ilość rund do rozegrania: ");
         count = scan.nextInt();
         scan.close();
 
         //stworzenie mapy o zadanych parametrach
-        Simulation map = new Simulation(size,amounts);//amountOfMonkeys,amountOfLions,amountOfChildren,amountOfAdults,numberOfHidings);
+        Simulation map = new Simulation(size,amounts);
         map.show();
         Thread.sleep(1000);
         //wyświetlanie zaktualizowanej mapy przez podaną ilość rund
@@ -36,7 +36,7 @@ public class Main {
             System.out.println("Runda "+i+":");
             map.update();
             map.show();
-            Thread.sleep(350);
+            Thread.sleep(250);
         }
     }
 }
