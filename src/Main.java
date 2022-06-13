@@ -1,11 +1,8 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
 public class Main {
 
-
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-
         int size,count;
         int [] amounts= new int[5];
 
@@ -36,7 +33,7 @@ public class Main {
             System.out.println("Runda "+i+":");
             map.update();
             map.show();
-            Thread.sleep(250);
+            Thread.sleep(150);
         }
     }
 }

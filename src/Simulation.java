@@ -2,7 +2,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
-
 public class Simulation {
     private final int size;
     String[][] map;
@@ -58,9 +57,6 @@ public class Simulation {
     public void interactions(Agent agent1) {
 
         String type1 = agent1.getType();
-        if (agent1.getType().equals("HIDING")) {
-            setCharacter(agent1.getPosition()[0], agent1.getPosition()[1], "[X]");
-        }
         //operacje na wieku
         if (type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY") || type1.equals("LION")) {
             agent1.setAge(agent1.getAge() + 2);
@@ -177,7 +173,6 @@ public class Simulation {
             }
         }
     }
-
     void findNearestFreeSpace(int x0, int y0){
         int minx=-1, miny=-1, maxx=1, maxy=1;
 
@@ -190,7 +185,6 @@ public class Simulation {
                 if(this.map[i][j].equals("[ ]")){
                     x = i;
                     y = j;
-                    return;
                 }
             }
         }
@@ -202,7 +196,6 @@ public class Simulation {
             y = rand.nextInt(size);
         } while(!this.map[y][x].equals("[ ]"));
     }
-
     //aktualizowanie mapy i zliczanie ilosc agentow
     public void update() {
         toRemove = new ArrayList<>();
@@ -219,13 +212,6 @@ public class Simulation {
         toAdd.clear();
         for (Agent agent : Map.agents) {
             String type = agent.getType();
-            // niekoniecznie musi dzialac porownywanie stringow
-//            switch (type) {
-//                case "MONKEY" -> count[0]++;
-//                case "LION" -> count[1]++;
-//                case "ADULT" -> count[2]++;
-//                case "CHILD" -> count[3]++;
-//            }
             if(type.equals("MONKEY")) count[0]++;
             else if(type.equals("LION")) count[1]++;
             else if(type.equals("ADULT")) count[2]++;
@@ -241,7 +227,6 @@ public class Simulation {
             int xx = agent.getPosition()[0];
             int yy = agent.getPosition()[1];
             String type = agent.getType();
-
             if(type.equals("MONKEY")) setCharacter(xx,yy,"[M]");
             else if(type.equals("LION")) setCharacter(xx,yy,"[L]");
             else if(type.equals("ADULT")) setCharacter(xx,yy,"[A]");
@@ -259,8 +244,7 @@ public class Simulation {
         for (int i=0; i<this.size; i++) {
             for (int j = 0; j < this.size; j++) {
                 System.out.print(this.map[i][j]);
-            }
-            System.out.println();
+            } System.out.println();
         }
     }
     //zapis ilosci agentow do pliku
@@ -271,10 +255,6 @@ public class Simulation {
         saver.append(String.valueOf(c[3])).append("\n");
         saver.flush();
     }
-    public void setCharacter(int x, int y, String c){
-        this.map[x][y] = c;
-    }
-    public int getSize() {
-        return size;
-    }
+    public void setCharacter(int x, int y, String c) { this.map[x][y] = c; }
+    public int getSize() { return size; }
 }
