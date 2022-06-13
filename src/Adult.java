@@ -4,9 +4,5 @@ public class Adult extends Human {
         this.type = "ADULT";
     }
     @Override
-    public void go(Simulation map) {
-        map.setCharacter(getPosition()[0], getPosition()[1], "[ ]");
-        super.go(map);
-       map.setCharacter(getPosition()[0], getPosition()[1], "[A]");
-    }
+    public void go(Simulation map) { super.go(map); }
 }

@@ -4,9 +4,5 @@ public class Monkey extends Animal {
         this.type = "MONKEY";
     }
     @Override
-    public void go(Simulation map) {
-        map.setCharacter(getPosition()[0], getPosition()[1], "[ ]");
-        super.go(map);
-        map.setCharacter(getPosition()[0], getPosition()[1], "[M]");
-    }
+    public void go(Simulation map) { super.go(map); }
 }
