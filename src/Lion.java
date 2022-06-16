@@ -1,3 +1,4 @@
+/** klasa Lion dziedzicząca po klasie Animal */
 public class Lion extends Animal {
     Lion(int x, int y, int age) {
         super(x, y, age);

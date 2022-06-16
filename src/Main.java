@@ -1,5 +1,10 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+/** klasa Main odpowiedzialna za komunikację z użytkownikiem
+ * oraz wywołanie poszczególnych metod odpowiedzialnych za działanie symulacji
+ * takich jak update czy show.
+ */
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {

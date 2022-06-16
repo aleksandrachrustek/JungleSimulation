@@ -1,3 +1,4 @@
+/** klasa Monkey dziedzicząca po klasie Animal */
 public class Monkey extends Animal {
     Monkey(int x, int y, int age) {
         super(x,y,age);

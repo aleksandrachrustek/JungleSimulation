@@ -1,4 +1,10 @@
 import java.util.Random;
+/** abstrakcyjna klasa Agent będąca klasą po której dziedziczą agenci
+ * poprzez klasy dziedziczące Human oraz Animal.
+ * posiada atrybuty wspólne dla wszystkich agentów
+ * oraz funkcję odpowiedzialną za poruszanie się.
+ */
+
 abstract class Agent {
     private int age;
     protected String type;

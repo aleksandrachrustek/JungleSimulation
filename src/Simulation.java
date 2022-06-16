@@ -2,6 +2,10 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
+/** klasa Simulation odpowiedzialna za poszczególne części symulacji takie jak tworzenie mapy,
+ * rozmieszczenie agentów, aktualizowanie mapy co rundę, obsługę interakcji oraz zapis do pliku.
+ * przechowuje mapę - tablicę dwuwymiarową typu String
+ */
 public class Simulation {
     private final int size;
     String[][] map;
