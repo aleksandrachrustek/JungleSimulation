@@ -1,4 +1,4 @@
-/** klasa Hiding dziedzicząca po klasie Agent */
+/** class Hiding extending the class Agent */
 public class Hiding extends Agent {
     public Hiding(int x, int y, int age) {
         super(x,y,age);

@@ -1,4 +1,4 @@
-/** klasa Adult dziedzicząca po klasie Human */
+/** class Adult extending the class Human */
 public class Adult extends Human {
     public Adult(int x, int y, int age){
         super(x,y,age);

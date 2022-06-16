@@ -1,4 +1,4 @@
-/** klasa Tarzan dziedzicząca po klasie Agent */
+/** class Tarzan extending the class Agent */
 public class Tarzan extends Agent {
     Tarzan(int x, int y, int age){
         super(x, y, age);

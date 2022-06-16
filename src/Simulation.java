@@ -2,9 +2,11 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
-/** klasa Simulation odpowiedzialna za poszczególne części symulacji takie jak tworzenie mapy,
- * rozmieszczenie agentów, aktualizowanie mapy co rundę, obsługę interakcji oraz zapis do pliku.
- * przechowuje mapę - tablicę dwuwymiarową typu String
+/** class Simulation responsible for particular parts of working simulation,
+ * such as creating a map; position of agents at the beginning, as well as
+ * during the simulation; updating the map every round; interactions between
+ * agents and saving number of agents counted every round to a newly created file;
+ * contains a map - a two-dimensional array of objects String.
  */
 public class Simulation {
     private final int size;
@@ -20,14 +22,14 @@ public class Simulation {
         rand = new Random();
         this.size = size;
 
-        /** tworzenie mapy - tablicy dwuwymiarowej typu String */
+        /** creating a map - a two-dimensional array of objects String */
         map = new String[this.size][this.size];
         for (int i=0; i<this.size; i++) {
             for (int j = 0; j < this.size; j++) {
                 this.map[i][j] = "[ ]";
             }
         }
-        /** rozmieszczenie zadanej przez użytkownika ilości agentów na mapie */
+        /** choosing the initial position of all the agents on the map */
         for(int i=0; i<amounts[0]; i++){
             findFreeSpace();
             Map.agents.add(new Monkey(x,y,1));
@@ -57,11 +59,11 @@ public class Simulation {
         Map.agents.add(new Tarzan(x,y,100));
         this.map[x][y] = "[T]";
     }
-    /** interakcje między agentami */
+    /** interactions between agents */
     public void interactions(Agent agent1) {
 
         String type1 = agent1.getType();
-        /** operacje na wieku */
+        /** changes related to age*/
         if (type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY") || type1.equals("LION")) {
             agent1.setAge(agent1.getAge() + 2);
         }
@@ -76,7 +78,7 @@ public class Simulation {
             if (agent1 != agent2) {
                 String type2 = agent2.getType();
                 if (agent1.getPosition()[0] == agent2.getPosition()[0] && agent1.getPosition()[1] == agent2.getPosition()[1]) {
-                    /** kryjówka */
+                    /** hiding */
                     if ((type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY")) && type2.equals("HIDING")) {
                         for (Agent agent3 : Map.agents) {
                             if (agent3.getType().equals("LION")) {
@@ -88,14 +90,14 @@ public class Simulation {
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
                         agent1.setPosition(x, y);
                     }
-                    /** zabijanie */
+                    /** agents killing each other */
                     if ((type1.equals("MONKEY") || type1.equals("ADULT") || type1.equals("CHILD")) && type2.equals("LION")) {
                         toRemove.add(agent1);
                     }
                     if (type1.equals("LION") && type2.equals("TARZAN")) {
                         toRemove.add(agent1);
                     }
-                    /** ponowny ruch agentów nie zabijających się nawzajem */
+                    /** repeated movement of agents which don't kill each other */
                     if (type1.equals("MONKEY") && (type2.equals("ADULT")||type2.equals("CHILD")||type2.equals("TARZAN"))) {
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
                         agent1.setPosition(x, y);
@@ -104,7 +106,7 @@ public class Simulation {
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
                         agent1.setPosition(x, y);
                     }
-                    /** pomoc ludziom przez tarzana */
+                    /** tarzan helping people */
                     if ((type1.equals("ADULT")||type1.equals("CHILD")) && type2.equals("TARZAN")) {
                         for (Agent agent3 : Map.agents) {
                             if (agent3.getType().equals("MONKEY")) {
@@ -114,7 +116,7 @@ public class Simulation {
                             }
                         }
                     }
-                    /** rozmnażanie */
+                    /** multiplication of agents of the same type */
                     if (type1.equals("LION") && type2.equals("LION")) {
                         findFreeSpace();
                         toAdd.add(new Lion(x, y, 1));
@@ -131,7 +133,7 @@ public class Simulation {
             }
         }
     }
-    /** funkcja znajdująca najbliższe wolne miejsce w pobliżu przekazanych argumentów */
+    /** finding a nearest free space in the surrounding of given parameters */
     void findNearestFreeSpace(int x0, int y0){
         int minx=-1, miny=-1, maxx=1, maxy=1;
 
@@ -149,14 +151,14 @@ public class Simulation {
         }
         findFreeSpace();
     }
-    /** funkcja znajdująca losowe wolne miejsce na mapie */
+    /** finding a randomly choosen free space on the map */
     void findFreeSpace(){
         do {
             x = rand.nextInt(size);
             y = rand.nextInt(size);
         } while(!this.map[y][x].equals("[ ]"));
     }
-    /** aktualizowanie mapy i zliczanie ilości agentów */
+    /** updating the map and counting the amounts of each agent's type */
     public void update() {
         toRemove = new ArrayList<>();
         toAdd = new ArrayList<>();
@@ -199,7 +201,7 @@ public class Simulation {
             }
         }
     }
-    /** wyświetlanie mapy */
+    /** printing out the map */
     public void show(){
         for (int i=0; i<this.size; i++) {
             for (int j = 0; j < this.size; j++) {
@@ -207,7 +209,7 @@ public class Simulation {
             } System.out.println();
         }
     }
-    /** zapis ilości agentów do pliku */
+    /** saving the amount of each agent's type to a file */
     public void save(int[] c) {
         saver.append(String.valueOf(c[0])).append(" ");
         saver.append(String.valueOf(c[1])).append(" ");

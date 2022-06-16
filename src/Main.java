@@ -1,9 +1,8 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-/** klasa Main odpowiedzialna za komunikację z użytkownikiem
- * oraz wywołanie poszczególnych metod odpowiedzialnych za działanie symulacji
- * takich jak update czy show.
+/** class Main responsible for communication with user and controlling
+ * respective methods needed for the simulation to work such as
+ * update or show.
  */
 public class Main {
 
@@ -11,7 +10,7 @@ public class Main {
         int size,count;
         int [] amounts= new int[5];
 
-        /** wczytanie ilości agentów podanej przez użytkownika */
+        /** scanning the input from the user - map size, amount of each agent's type, number of rounds */
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj rozmiar mapy: ");
         size = scan.nextInt();
@@ -29,11 +28,11 @@ public class Main {
         count = scan.nextInt();
         scan.close();
 
-        /** stworzenie mapy o zadanych parametrach */
+        /** creating a map with given parameters */
         Simulation map = new Simulation(size,amounts);
         map.show();
         Thread.sleep(1000);
-        /** wyświetlanie zaktualizowanej mapy przez podaną ilość rund */
+        /** showcasing a map for given number of rounds */
         for(int i=1;i<=count;i++){
             System.out.println("Runda "+i+":");
             map.update();

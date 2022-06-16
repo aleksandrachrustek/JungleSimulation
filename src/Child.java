@@ -1,4 +1,4 @@
-/** klasa Child dziedzicząca po klasie Human */
+/** class Child extending the class Human */
 public class Child extends Human {
     Child(int x, int y, int age){
         super(x,y,age);

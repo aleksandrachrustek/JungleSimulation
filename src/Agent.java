@@ -1,8 +1,8 @@
 import java.util.Random;
-/** abstrakcyjna klasa Agent będąca klasą po której dziedziczą agenci
- * poprzez klasy dziedziczące Human oraz Animal.
- * posiada atrybuty wspólne dla wszystkich agentów
- * oraz funkcję odpowiedzialną za poruszanie się.
+/** abstract class Agent being the class that agents inherit from
+ * through classes Human and Animal.
+ * contains attributes shared by all the agents and method responsible
+ * for movement.
  */
 
 abstract class Agent {
@@ -15,11 +15,11 @@ abstract class Agent {
         this.age = age;
     }
 
-    /** poruszanie sie agentów */
+    /** agents' movement */
     public void go(Simulation map) {
         Random rand = new Random();
         int choice;
-        /** case: 0-w lewo 1-w górę 2-w prawo 3-w dół 4-w lewo i w górę 5-w prawo i w dół 6-w prawo i w górę 7-w lewo i w dół */
+        /** case: 0-left, 1-up, 2-right, 3-down, 4-left and up, 5-right and down, 6-right and up, 7-left and down */
         do {
             choice = rand.nextInt(8);
             switch (choice) {
