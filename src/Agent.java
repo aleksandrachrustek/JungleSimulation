@@ -9,11 +9,11 @@ abstract class Agent {
         this.age = age;
     }
 
-    //poruszanie sie agentow
+    /** poruszanie sie agentów */
     public void go(Simulation map) {
         Random rand = new Random();
         int choice;
-        // case: 0-w lewo 1-w górę 2-w prawo 3-w dół 4-w lewo i w górę 5-w prawo i w dół 6-w prawo i w górę 7-w lewo i w dół
+        /** case: 0-w lewo 1-w górę 2-w prawo 3-w dół 4-w lewo i w górę 5-w prawo i w dół 6-w prawo i w górę 7-w lewo i w dół */
         do {
             choice = rand.nextInt(8);
             switch (choice) {

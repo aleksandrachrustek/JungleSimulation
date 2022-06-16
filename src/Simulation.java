@@ -16,14 +16,14 @@ public class Simulation {
         rand = new Random();
         this.size = size;
 
-        //tworzenie mapy - tablicy dwuwymiarowej typu String
+        /** tworzenie mapy - tablicy dwuwymiarowej typu String */
         map = new String[this.size][this.size];
         for (int i=0; i<this.size; i++) {
             for (int j = 0; j < this.size; j++) {
                 this.map[i][j] = "[ ]";
             }
         }
-        //rozmieszczenie zadanej przez użytkownika ilosci agentow na mapie
+        /** rozmieszczenie zadanej przez użytkownika ilości agentów na mapie */
         for(int i=0; i<amounts[0]; i++){
             findFreeSpace();
             Map.agents.add(new Monkey(x,y,1));
@@ -53,11 +53,11 @@ public class Simulation {
         Map.agents.add(new Tarzan(x,y,100));
         this.map[x][y] = "[T]";
     }
-    //interakcje miedzy agentami
+    /** interakcje między agentami */
     public void interactions(Agent agent1) {
 
         String type1 = agent1.getType();
-        //operacje na wieku
+        /** operacje na wieku */
         if (type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY") || type1.equals("LION")) {
             agent1.setAge(agent1.getAge() + 2);
         }
@@ -72,7 +72,7 @@ public class Simulation {
             if (agent1 != agent2) {
                 String type2 = agent2.getType();
                 if (agent1.getPosition()[0] == agent2.getPosition()[0] && agent1.getPosition()[1] == agent2.getPosition()[1]) {
-                    //kryjowka
+                    /** kryjówka */
                     if ((type1.equals("ADULT") || type1.equals("CHILD") || type1.equals("MONKEY")) && type2.equals("HIDING")) {
                         for (Agent agent3 : Map.agents) {
                             if (agent3.getType().equals("LION")) {
@@ -84,14 +84,14 @@ public class Simulation {
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
                         agent1.setPosition(x, y);
                     }
-                    //funkcja kill
+                    /** zabijanie */
                     if ((type1.equals("MONKEY") || type1.equals("ADULT") || type1.equals("CHILD")) && type2.equals("LION")) {
                         toRemove.add(agent1);
                     }
                     if (type1.equals("LION") && type2.equals("TARZAN")) {
                         toRemove.add(agent1);
                     }
-                    //ponowny ruch agentow nie zabijajacych sie nawzajem
+                    /** ponowny ruch agentów nie zabijających się nawzajem */
                     if (type1.equals("MONKEY") && (type2.equals("ADULT")||type2.equals("CHILD")||type2.equals("TARZAN"))) {
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
                         agent1.setPosition(x, y);
@@ -100,7 +100,7 @@ public class Simulation {
                         findNearestFreeSpace(agent1.getPosition()[0], agent1.getPosition()[1]);
                         agent1.setPosition(x, y);
                     }
-                    //tarzan pomaga ludziom
+                    /** pomoc ludziom przez tarzana */
                     if ((type1.equals("ADULT")||type1.equals("CHILD")) && type2.equals("TARZAN")) {
                         for (Agent agent3 : Map.agents) {
                             if (agent3.getType().equals("MONKEY")) {
@@ -110,7 +110,7 @@ public class Simulation {
                             }
                         }
                     }
-                    //funkcja copy
+                    /** rozmnażanie */
                     if (type1.equals("LION") && type2.equals("LION")) {
                         findFreeSpace();
                         toAdd.add(new Lion(x, y, 1));
@@ -127,6 +127,7 @@ public class Simulation {
             }
         }
     }
+    /** funkcja znajdująca najbliższe wolne miejsce w pobliżu przekazanych argumentów */
     void findNearestFreeSpace(int x0, int y0){
         int minx=-1, miny=-1, maxx=1, maxy=1;
 
@@ -142,15 +143,16 @@ public class Simulation {
                 }
             }
         }
-        findFreeSpace(); // jezeli nie ma wolnego miejsca wokol (x0,y0)
+        findFreeSpace();
     }
+    /** funkcja znajdująca losowe wolne miejsce na mapie */
     void findFreeSpace(){
         do {
             x = rand.nextInt(size);
             y = rand.nextInt(size);
         } while(!this.map[y][x].equals("[ ]"));
     }
-    //aktualizowanie mapy i zliczanie ilosc agentow
+    /** aktualizowanie mapy i zliczanie ilości agentów */
     public void update() {
         toRemove = new ArrayList<>();
         toAdd = new ArrayList<>();
@@ -193,7 +195,7 @@ public class Simulation {
             }
         }
     }
-    //wyswietlanie mapy
+    /** wyświetlanie mapy */
     public void show(){
         for (int i=0; i<this.size; i++) {
             for (int j = 0; j < this.size; j++) {
@@ -201,7 +203,7 @@ public class Simulation {
             } System.out.println();
         }
     }
-    //zapis ilosci agentow do pliku
+    /** zapis ilości agentów do pliku */
     public void save(int[] c) {
         saver.append(String.valueOf(c[0])).append(" ");
         saver.append(String.valueOf(c[1])).append(" ");

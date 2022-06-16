@@ -6,7 +6,7 @@ public class Main {
         int size,count;
         int [] amounts= new int[5];
 
-        //wczytanie ilości agentów podanej przez użytkownika
+        /** wczytanie ilości agentów podanej przez użytkownika */
         Scanner scan = new Scanner(System.in);
         System.out.println("Podaj rozmiar mapy: ");
         size = scan.nextInt();
@@ -24,11 +24,11 @@ public class Main {
         count = scan.nextInt();
         scan.close();
 
-        //stworzenie mapy o zadanych parametrach
+        /** stworzenie mapy o zadanych parametrach */
         Simulation map = new Simulation(size,amounts);
         map.show();
         Thread.sleep(1000);
-        //wyświetlanie zaktualizowanej mapy przez podaną ilość rund
+        /** wyświetlanie zaktualizowanej mapy przez podaną ilość rund */
         for(int i=1;i<=count;i++){
             System.out.println("Runda "+i+":");
             map.update();
