@@ -1,3 +1,3 @@
 # JungleSimulation
 
-Repozytorium projektu z Projektowania Obiektowego, PWr, ITE sem.2
+Repozytorium projektu z Programowania Obiektowego, PWr, ITE sem.2
